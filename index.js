@@ -1,14 +1,23 @@
 import express from "express";
 import mysql from "mysql2";
 import cors from "cors";
+import { PORT } from "./config.js";
+import {
+  DB_HOST,
+  DB_NAME,
+  DB_PASSWORD,
+  DB_USER,
+  DB_PORT
+} from "./config.js"
 
 const app = express();
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Thekinghasarrived123@534",
-  database: "crud_equipo",
+  user: DB_USER,
+  password: DB_PASSWORD,
+  host: DB_HOST,
+  port: DB_PORT,
+  database: DB_NAME,
 });
 
 app.use(express.json()); // Permite al servidor entender y procesar estos datos JSON adjuntos en el cuerpo de la solicitud.
@@ -248,6 +257,6 @@ app.get("/equipos/:id/mantenimiento", (req, res) => {
   });
 });
 
-app.listen(8800, () => {
+app.listen(PORT, () => {
   console.log("Connected to backend");
 });
